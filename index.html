@@ -1,11 +1,860 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Manjit Kumar Nayak | Portfolio</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* ================= GLOBAL ================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #ff0080, #7928ca, #2afadf, #00c9ff, #ff4ecd, #4facfe);
+            background-size: 400% 400%;
+            animation: bgAnimation 12s ease infinite;
+        }
+
+        /* BACKGROUND ANIMATION */
+
+        @keyframes bgAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* PARTICLES EFFECT */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle, rgba(255, 255, 255, 0.3) 2px, transparent 2px);
+            background-size: 60px 60px;
+            animation: moveParticles 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveParticles {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-100px);
+            }
+        }
+
+        /* LOADER */
+
+        #loader {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader-text {
+            font-size: 50px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px cyan;
+            }
+
+            to {
+                text-shadow: 0 0 40px cyan,
+                    0 0 80px cyan;
+            }
+        }
+
+        /* NAVBAR */
+
+        .custom-nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-link {
+            color: white !important;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: 0.5s;
+        }
+
+        .nav-link:hover {
+            color: cyan !important;
+            transform: translateY(-3px);
+        }
+
+        .logo {
+            font-size: 35px;
+            font-weight: bold;
+            color: white !important;
+            text-shadow: 0 0 20px cyan;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+        }
+
+        .main-title {
+            font-size: 75px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px cyan;
+            animation: slideLeft 2s;
+        }
+
+        @keyframes slideLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .typing {
+            font-size: 35px;
+            color: cyan;
+            margin-top: 20px;
+        }
+
+        .hero-text {
+            font-size: 20px;
+            color: white;
+            margin-top: 20px;
+            line-height: 35px;
+        }
+
+        .custom-btn {
+            background: cyan;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            color: black;
+            box-shadow: 0 0 20px cyan;
+            transition: 0.5s;
+            border: none;
+        }
+
+        .custom-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px cyan;
+        }
+
+        /* PROFILE */
+
+        .profile-box {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: auto;
+            border: 6px solid cyan;
+            box-shadow: 0 0 40px cyan;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .profile-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* SECTION */
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .title {
+            font-size: 60px;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            text-shadow: 0 0 20px cyan;
+        }
+
+        /* GLASS EFFECT */
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 25px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: 0.5s;
+        }
+
+        .glass:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px cyan;
+        }
+
+        /* CARD */
+
+        .card-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            height: 100%;
+            transition: 0.5s;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px cyan;
+        }
+
+        .card-box img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-box i {
+            font-size: 70px;
+            color: cyan;
+            margin-bottom: 20px;
+        }
+
+        /* CONTACT */
+
+        .contact-box h3 {
+            margin: 20px 0;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: black;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:768px) {
+
+            .main-title {
+                font-size: 42px;
+                text-align: center;
+            }
+
+            .typing {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .hero-text {
+                font-size: 18px;
+                text-align: center;
+            }
+
+            .profile-box {
+                width: 250px;
+                height: 250px;
+                margin-top: 40px;
+            }
+
+            .title {
+                font-size: 38px;
+            }
+
+            .loader-text {
+                font-size: 28px;
+                padding: 20px;
+            }
+
+        }
+    </style>
+
 </head>
+
 <body>
-    <h1>HELLO EVERYONE !!!</h1>
+
+    <!-- LOADER -->
+
+    <div id="loader">
+        <h1 class="loader-text">
+            WELCOME TO MY WORLD 🚀
+        </h1>
+    </div>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top custom-nav">
+
+        <div class="container">
+
+            <a class="navbar-brand logo" href="#">
+                MANJIT
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hobby">Hobbies</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#goal">Goals</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#thought">Thought</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-lg-6 text-white" data-aos="fade-right">
+
+                    <h1 class="main-title">
+                        MANJIT KUMAR NAYAK
+                    </h1>
+
+                    <h2 class="typing">
+                        Future Web Developer 🚀
+                    </h2>
+
+                    <p class="hero-text">
+
+                        I am passionate about Coding, Web Development and Startup Business.
+                        I love creating beautiful websites with animations and modern designs.
+
+                    </p>
+
+                    <button class="custom-btn mt-4">
+                        re More
+                    </button>
+
+                </div>
+
+                <div class="col-lg-6" data-aos="zoom-in">
+
+                    <div class="profile-box">
+
+                        <!-- APNA PHOTO YAHA DALNA -->
+                        <img src="img/index.html.jpeg">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ABOUT -->
+
+    <section class="section" id="about">
+
+        <div class="container">
+
+            <h1 class="title">
+                ABOUT ME
+            </h1>
+
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-5">
+
+                    <div class="profile-box">
+                        <img src="img/manjitpng.jpeg">
+                    </div>
+
+                </div>
+
+                <div class="col-lg-7">
+
+                    <div class="glass">
+
+                        <h2>Hello 👋</h2>
+
+                        <p>
+                            My name is <b>Manjit Kumar Nayak</b>.
+                        </p>
+
+                        <p>
+                            Currently I am studying in class 11th.
+                        </p>
+
+                        <p>
+                            I love coding and creating animated websites.
+                        </p>
+
+                        <p>
+                            Address:
+                            Jainamore Bandhdih Near High School Jharkhand
+                        </p>
+
+                        <p>
+                            This boy will become a very successful developer in future 🔥
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SKILLS -->
+
+    <section class="section" id="skills">
+
+        <div class="container">
+
+            <h1 class="title">
+                MY SKILLS
+            </h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <i class="fa-brands fa-html5"></i>
+                        <h3>HTML</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <i class="fa-brands fa-css3-alt"></i>
+                        <h3>CSS</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <i class="fa-brands fa-js"></i>
+                        <h3>JavaScript</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <i class="fa-brands fa-bootstrap"></i>
+                        <h3>Bootstrap</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <i class="fa-brands fa-angular"></i>
+                        <h3>Angular</h3>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <i class="fa-solid fa-code"></i>
+                        <h3>Frontend Developer</h3>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- HOBBIES -->
+
+    <section class="section" id="hobby">
+
+        <div class="container">
+
+            <h1 class="title">
+                MY HOBBIES
+            </h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+
+                    <div class="card-box">
+
+                        <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e">
+
+                        <h2>Cricket 🏏</h2>
+
+                        <p>
+                            Cricket is my favorite hobby.
+                            It teaches teamwork and confidence.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="card-box">
+
+                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4">
+
+                        <h2>Coding 💻</h2>
+
+                        <p>
+                            Coding is my passion.
+                            I love creating modern websites and apps.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CERTIFICATES -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <h1 class="title">
+                MY CERTIFICATES
+            </h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <img src="img/certificate of css.jpeg">
+                        <h3>HTML Certificate</h3>
+                        <p>SoloLearn Certified</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <img src="img/certificate of css.jpeg">
+                        <h3>CSS Certificate</h3>
+                        <p>SoloLearn Certified</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card-box">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+                        <h3>JavaScript Certificate</h3>
+                        <p>SoloLearn Certified</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GOALS -->
+
+    <section class="section" id="goal">
+
+        <div class="container">
+
+            <h1 class="title">
+                MY GOALS
+            </h1>
+
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-7">
+
+                    <div class="glass">
+
+                        <h2>Future Goals 🚀</h2>
+
+                        <p>✔ Crack JEE Mains</p>
+
+                        <p>✔ Crack JEE Advanced</p>
+
+                        <p>✔ Take Admission In IIT</p>
+
+                        <p>✔ Become Professional Web Developer</p>
+
+                        <p>✔ Build Successful Startup Business</p>
+
+                        <p>✔ Create Amazing Websites & Apps</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-5">
+
+                    <div class="profile-box">
+                        <img src="img/img4.jpeg">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- THOUGHT -->
+
+    <section class="section" id="thought">
+
+        <div class="container">
+
+            <h1 class="title">
+                MY THOUGHTS
+            </h1>
+
+            <div class="row align-items-center g-5">
+
+                <div class="col-lg-5">
+
+                    <div class="profile-box">
+                        <img src="img/img5.jpeg">
+                    </div>
+
+                </div>
+
+                <div class="col-lg-7">
+
+                    <div class="glass">
+
+                        <p style="font-size:22px; line-height:40px;">
+
+                            “Mere liye, web development sirf code likhna nahi hai, balki digital duniya me ek behtareen
+                            experience create karna hai. Main hamesha visual aesthetics aur performance ke beech ka
+                            perfect balance dhoodhta hoon.”
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FAMILY -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <h1 class="title">
+                MY FAMILY
+            </h1>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+
+                    <div class="card-box">
+
+                        <img src="img5">
+
+                        <h2>Mother ❤️</h2>
+
+                        <p>Rupa Devi</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="card-box">
+
+                        <img src="img/img6.jpeg">
+
+                        <h2>Father ❤️</h2>
+
+                        <p>Mantu Nayak</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="section" id="contact">
+
+        <div class="container">
+
+            <h1 class="title">
+                CONTACT ME
+            </h1>
+
+            <div class="glass text-center contact-box">
+
+                <h3>📞 9341439039</h3>
+
+                <h3>📧 manjit123nyk@gmail.com</h3>
+
+                <h3>📍 Jainamore Bandhdih Near High School Jharkhand</h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>
+            Made With ❤️ By Manjit Kumar Nayak
+        </h3>
+
+    </footer>
+
+    <!-- JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+
+        AOS.init();
+
+        window.addEventListener("load", function () {
+
+            setTimeout(function () {
+
+                document.getElementById("loader").style.display = "none";
+
+            }, 3000);
+
+        });
+
+    </script>
+
 </body>
+
 </html>
